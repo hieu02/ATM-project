@@ -23,6 +23,7 @@ void UserAccount::logIn(UserAccount& account)
     }
     else 
     {
+        cout << "login sucessfully";
         inputAccountData(account);
     }
 }
