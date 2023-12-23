@@ -20,36 +20,35 @@ public:
 	//setter, getter
 	void getID();
 	void setPin();
-
 	//login
-
+	void logIn();
 	// function to interact with file:
-	bool inputAccountData(UserAccount& User_Account);
+	bool inputAccountData(UserAccount& account);
 	void createAccountFile(const UserAccount& account);
+	void updateFile(UserAccount& account);
 	// function to generate random id
 	string generateRandomID();
 	//function to create new account
 	void createAccount(UserAccount& account);
-	
-//	//function to exit the login menu of the ATM
-//	void exit();
-//	//function to display account information
-//	void AccountInformation(UserAccount& account);
-//	//function to withdraw the money
-//	void withdraw(UserAccount& amount);
-//	//function to deposit the money
-//	void deposit();
-//	//function to tranfer the money to friendly account
-//	void transfer();
-//	//function to exit the main menu of ATM
-//	void logOut();
-//};
-//
-//class Menu : public UserAccount
-//{
-//public:
-//	//function to display the login and create account menu
-//	void displayMenu();
-//	//function to display the account menu
-//	void displayMainMenu();
-//};
+	//function to exit the login menu of the ATM
+	void exit();
+	//function to display account information
+	void AccountInformation(UserAccount& account);
+	//function to withdraw the money
+	void withdraw(UserAccount& amount);
+	//function to deposit the money
+	void deposit();
+	//function to tranfer the money to friendly account
+	void transfer();
+	//function to exit the main menu of ATM
+	void logOut();
+};
+
+class Menu : public UserAccount
+{
+public:
+	//function to display the login and create account menu
+	void displayMenu();
+	//function to display the account menu
+	void displayMainMenu();
+};

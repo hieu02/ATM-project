@@ -2,6 +2,6 @@
 
 int main()
 {
-	UserAccount u ;
+	UserAccount u;
 	u.createAccount(u);
 }

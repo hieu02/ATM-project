@@ -1,6 +1,11 @@
 #include "ATM.h"
 
-// function to read the data from the file and input them
+// constructor
+UserAccount::UserAccount()
+{
+
+}
+// function to interact with file
 bool UserAccount::inputAccountData(UserAccount& account)
 {
     ifstream file(account.ID + ".txt");
@@ -20,7 +25,7 @@ bool UserAccount::inputAccountData(UserAccount& account)
     file.close();
     return true;
 }
-// function to create a new file with the user's input
+
 void UserAccount::createAccountFile(const UserAccount& account)
 {
     ofstream file(account.ID + ".txt");
@@ -31,7 +36,20 @@ void UserAccount::createAccountFile(const UserAccount& account)
     }
     file.close();
 }
-//function to generate random ID
+
+void UserAccount::updateFile(UserAccount& account)
+{
+    ifstream file(account.ID + ".txt");
+    file >> account.pin >> account.balance;
+    string friendlyAccounts;
+    while (file >> friendlyAccounts)
+    {
+        account.friendlyAccounts.push_back(friendlyAccounts);
+    }
+
+}
+
+// function to generate random ID
 string UserAccount::generateRandomID()
 {
     // generate the character to random
@@ -49,6 +67,7 @@ string UserAccount::generateRandomID()
 
     return randomID;
 }
+
 //function to create new account:
 void UserAccount::createAccount(UserAccount& account)
 {
@@ -56,7 +75,7 @@ void UserAccount::createAccount(UserAccount& account)
     int userPin;
     cout << "Set your PIN (6 digits): ";
     cin >> userPin;
-        if (userPin < 100000 || userPin > 1000000)
+        while (userPin < 100000 || userPin > 1000000)
         {
             cout << "error, please set a 6 digits password: ";
             cout << "Set your PIN (6 digits): " << endl;
@@ -66,27 +85,77 @@ void UserAccount::createAccount(UserAccount& account)
     account.balance = 0.0;
     createAccountFile(account);
 }
+
+// function to exit the login menu
 void exit()
 {
-
+    return;
 }
+
 //function to display account information
 void UserAccount::AccountInformation(UserAccount& account)
 {
         cout << "Account ID: " << account.ID << endl;
         cout << "Balance: $" << account.balance << endl;
-        cout << "friendly account: " << endl;
+        cout << "Friendly account: " << endl;
         for (const string& friendlyID : account.friendlyAccounts)
         {
             cout << friendlyID << " ";
         }
         cout << endl;
 }
+
 //function to withdraw the money
 void UserAccount::withdraw(UserAccount& amount)
 {
-
+        int option = 0;
+        do
+        {
+            cout << "input the amount to withdraw: " << endl;
+            cout << "1. 10" << endl;
+            cout << "2. 20" << endl;
+            cout << "3. 50" << endl;
+            cout << "4. 100" << endl;
+            cout << "5. other" << endl;
+            cin >> option;
+            switch (option)
+            {
+            case(1):
+            {
+                amount.balance -= 10;
+            }
+            case(2):
+            {
+                amount.balance -= 20;
+            }
+            case(3):
+            {
+                amount.balance -= 50;
+            }
+            case(4):
+            {
+                amount.balance -= 100;
+            }
+            case(5):
+            {
+                int otherAmount;
+                cout << "amount you want to withdraw:";
+                cin >> otherAmount;
+                if (otherAmount > amount.balance)
+                {
+                    cout << "not enough money!";
+                    break;
+                }
+                else
+                {
+                    amount.balance -= otherAmount;
+                }
+            }
+            }
+            updateFile(amount);
+        } while (option > 0 && option <= 5);
 }
+
 //function to deposit the money
 void UserAccount::deposit()
 {
@@ -100,5 +169,5 @@ void UserAccount::transfer()
 //function to exit the main menu of ATM
 void UserAccount::logOut()
 {
-
+    return;
 }
