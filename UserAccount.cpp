@@ -50,9 +50,21 @@ string UserAccount::generateRandomID()
     return randomID;
 }
 //function to create new account:
-void UserAccount::createAccount(string id, int pin, double amount)
+void UserAccount::createAccount(UserAccount& account)
 {
-
+    account.ID = generateRandomID();
+    int userPin;
+    cout << "Set your PIN (6 digits): ";
+    cin >> userPin;
+        if (userPin < 100000 || userPin > 1000000)
+        {
+            cout << "error, please set a 6 digits password: ";
+            cout << "Set your PIN (6 digits): " << endl;
+            cin >> userPin;
+        }
+    account.pin = userPin;
+    account.balance = 0.0;
+    createAccountFile(account);
 }
 void exit()
 {
@@ -61,7 +73,14 @@ void exit()
 //function to display account information
 void UserAccount::AccountInformation(UserAccount& account)
 {
-
+        cout << "Account ID: " << account.ID << endl;
+        cout << "Balance: $" << account.balance << endl;
+        cout << "friendly account: " << endl;
+        for (const string& friendlyID : account.friendlyAccounts)
+        {
+            cout << friendlyID << " ";
+        }
+        cout << endl;
 }
 //function to withdraw the money
 void UserAccount::withdraw(UserAccount& amount)
