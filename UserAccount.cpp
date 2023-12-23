@@ -145,52 +145,77 @@ void UserAccount::AccountInformation(UserAccount& account)
 //function to withdraw the money
 void UserAccount::withdraw(UserAccount& amount)
 {
-        int option = 0;
-        do
+    const int opt1 = 10, opt2 = 20, opt3 = 50, opt4 = 100;
+    int option = 0;
+    do
+    {
+        cout << "input the amount to withdraw: " << endl;
+        cout << "1. " << opt1 << endl;
+        cout << "2. " << opt2 << endl;
+        cout << "3. " << opt3 << endl;
+        cout << "4. " << opt4 << endl;
+        cout << "5. Other "  << endl;
+        cin >> option;
+        switch (option)
         {
-            cout << "input the amount to withdraw: " << endl;
-            cout << "1. 10" << endl;
-            cout << "2. 20" << endl;
-            cout << "3. 50" << endl;
-            cout << "4. 100" << endl;
-            cout << "5. other" << endl;
-            cin >> option;
-            switch (option)
+        case(1):
+        {
+            if (opt1 > amount.balance)
             {
-            case(1):
+                cout << "not enough money!";
+                break;
+            }
+            else
+            amount.balance -= 10;
+        }
+        case(2):
+        {
+            if (opt2 > amount.balance)
             {
-                amount.balance -= 10;
+                cout << "not enough money!";
+                break;
             }
-            case(2):
+            else
+            amount.balance -= 20;
+        }
+        case(3):
+        {
+            if (opt3 > amount.balance)
             {
-                amount.balance -= 20;
+                cout << "not enough money!";
+                break;
             }
-            case(3):
+            else
+            amount.balance -= 50;
+        }
+        case(4):
+        {
+            if (opt4 > amount.balance)
             {
-                amount.balance -= 50;
+                cout << "not enough money!";
+                break;
             }
-            case(4):
+            else
+            amount.balance -= 100;
+        }
+        case(5):
+        {
+            int otherAmount;
+            cout << "amount you want to withdraw: ";
+            cin >> otherAmount;
+            if (otherAmount > amount.balance)
             {
-                amount.balance -= 100;
+                cout << "not enough money!";
+                break;
             }
-            case(5):
+            else
             {
-                int otherAmount;
-                cout << "amount you want to withdraw:";
-                cin >> otherAmount;
-                if (otherAmount > amount.balance)
-                {
-                    cout << "not enough money!";
-                    break;
-                }
-                else
-                {
-                    amount.balance -= otherAmount;
-                }
+                amount.balance -= otherAmount;
             }
-            }
+        }
+        }
             updateFile(amount);
-        } while (option > 0 && option <= 5);
+    } while (option > 0 && option <= 5);
 }
 
 //function to deposit the money
