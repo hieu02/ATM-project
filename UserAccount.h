@@ -11,14 +11,14 @@ class UserAccount
 {
 private:
 	string ID;
-	int pin;
+	double pin;
 	vector<string> friendlyAccounts;
 	double balance;
 public:
 	// default constructor
 	UserAccount();
 	//login
-	void logIn(UserAccount& account);
+	bool logIn(UserAccount& account);
 	// function to interact with file:
 	bool inputAccountData(UserAccount& account);
 	void createAccountFile(const UserAccount& account);
@@ -40,3 +40,10 @@ public:
 	//function to exit the main menu of ATM
 	void logOut();
 };
+
+//class Menu : public UserAccount
+//{
+//	Menu();
+//	void displayLoginMenu();
+//	void displayAccountMenu();
+//};

@@ -7,11 +7,12 @@ UserAccount::UserAccount()
 }
 
 //login
-void UserAccount::logIn(UserAccount& account)
+bool UserAccount::logIn(UserAccount& account)
 {
     string _userInputId;
-    int _userInputPin;
-    cout << "please input your ID (10 characters): ";
+    double _userInputPin;
+    cout << "please input your ID (10 characters): " << endl;
+    cin.ignore(10);
     getline(cin, _userInputId);
     cout << "please input your pin (6 characters): ";
     cin >> _userInputPin;
@@ -20,11 +21,13 @@ void UserAccount::logIn(UserAccount& account)
     {
         cout << "incorrect pin code !" << endl;
         cout << "returning to menu" << endl;
+        return 0;
     }
     else 
     {
         cout << "login sucessfully";
         inputAccountData(account);
+        return 1;
     }
 }
 
@@ -52,6 +55,15 @@ bool UserAccount::inputAccountData(UserAccount& account)
 void UserAccount::createAccountFile(const UserAccount& account)
 {
     ofstream file(account.ID + ".txt");
+    if (!file)
+    {
+        cout << "account creation failed" << endl;
+    }
+    else
+    {
+        cout << "account created sucessfully" << endl;
+    }
+    cout << "return to menu" << endl;
     file << account.pin << " " << account.balance;
     for (const string& friendlyID : account.friendlyAccounts)
     {
@@ -96,9 +108,9 @@ string UserAccount::generateRandomID()
 void UserAccount::createAccount(UserAccount& account)
 {
     account.ID = generateRandomID();
-    cout << "your ID is: " << account.ID;
-    int userPin;
-    cout << "Set your PIN (6 digits): ";
+    cout << "your ID is: " << account.ID << endl;
+    double userPin;
+    cout << "Set your PIN (6 digits): " << endl;;
     cin >> userPin;
     while (userPin < 100000 || userPin > 1000000)
     {
