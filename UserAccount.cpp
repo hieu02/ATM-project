@@ -21,6 +21,10 @@ void UserAccount::logIn(UserAccount& account)
         cout << "incorrect pin code !" << endl;
         cout << "returning to menu" << endl;
     }
+    else 
+    {
+        inputAccountData(account);
+    }
 }
 
 // function to interact with file
@@ -95,12 +99,12 @@ void UserAccount::createAccount(UserAccount& account)
     int userPin;
     cout << "Set your PIN (6 digits): ";
     cin >> userPin;
-        while (userPin < 100000 || userPin > 1000000)
-        {
-            cout << "error, please set a 6 digits password: ";
-            cout << "Set your PIN (6 digits): " << endl;
-            cin >> userPin;
-        }
+    while (userPin < 100000 || userPin > 1000000)
+    {
+        cout << "error, please set a 6 digits password: ";
+        cout << "Set your PIN (6 digits): " << endl;
+        cin >> userPin;
+    }
     account.pin = userPin;
     account.balance = 0.0;
     createAccountFile(account);
