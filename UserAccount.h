@@ -17,11 +17,8 @@ private:
 public:
 	// default constructor
 	UserAccount();
-	//setter, getter
-	void getID();
-	void setPin();
 	//login
-	void logIn();
+	void logIn(UserAccount& account);
 	// function to interact with file:
 	bool inputAccountData(UserAccount& account);
 	void createAccountFile(const UserAccount& account);
@@ -42,13 +39,4 @@ public:
 	void transfer();
 	//function to exit the main menu of ATM
 	void logOut();
-};
-
-class Menu : public UserAccount
-{
-public:
-	//function to display the login and create account menu
-	void displayMenu();
-	//function to display the account menu
-	void displayMainMenu();
 };

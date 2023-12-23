@@ -1,10 +1,28 @@
-#include "ATM.h"
+#include "UserAccount.h"
 
 // constructor
 UserAccount::UserAccount()
 {
 
 }
+
+//login
+void UserAccount::logIn(UserAccount& account)
+{
+    string _userInputId;
+    int _userInputPin;
+    cout << "please input your ID (10 characters): ";
+    getline(cin, _userInputId);
+    cout << "please input your pin (6 characters): ";
+    cin >> _userInputPin;
+    _userInputId = account.ID;
+    if (!(inputAccountData(account)) || account.pin != _userInputPin)
+    {
+        cout << "incorrect pin code !" << endl;
+        cout << "returning to menu" << endl;
+    }
+}
+
 // function to interact with file
 bool UserAccount::inputAccountData(UserAccount& account)
 {
@@ -39,14 +57,15 @@ void UserAccount::createAccountFile(const UserAccount& account)
 
 void UserAccount::updateFile(UserAccount& account)
 {
-    ifstream file(account.ID + ".txt");
-    file >> account.pin >> account.balance;
+    ofstream file;
+    file.open(account.ID + ".txt");
+    file << account.pin << account.balance;
     string friendlyAccounts;
-    while (file >> friendlyAccounts)
+    while (file << friendlyAccounts)
     {
         account.friendlyAccounts.push_back(friendlyAccounts);
     }
-
+    file.close();
 }
 
 // function to generate random ID
@@ -72,6 +91,7 @@ string UserAccount::generateRandomID()
 void UserAccount::createAccount(UserAccount& account)
 {
     account.ID = generateRandomID();
+    cout << "your ID is: " << account.ID;
     int userPin;
     cout << "Set your PIN (6 digits): ";
     cin >> userPin;
@@ -161,11 +181,13 @@ void UserAccount::deposit()
 {
 
 }
+
 //function to tranfer the money to friendly account
 void UserAccount::transfer()
 {
 
 }
+
 //function to exit the main menu of ATM
 void UserAccount::logOut()
 {
