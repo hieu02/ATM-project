@@ -17,22 +17,24 @@ private:
 public:
 	// default constructor
 	UserAccount();
+	//setter,getter
+	void setID(string);
 	//login
-	bool logIn(UserAccount& account);
+	bool login(UserAccount& );
 	// function to interact with file:
-	bool inputAccountData(UserAccount& account);
-	void createAccountFile(const UserAccount& account);
-	void updateFile(UserAccount& account);
+	bool inputAccountData(const string& , UserAccount& );
+	void createAccountFile(const UserAccount& );
+	void updateFile(UserAccount& );
 	// function to generate random id
 	string generateRandomID();
 	//function to create new account
-	void createAccount(UserAccount& account);
+	void createAccount(UserAccount& );
 	//function to exit the login menu of the ATM
 	void exit();
 	//function to display account information
-	void AccountInformation(UserAccount& account);
+	void AccountInformation(UserAccount& );
 	//function to withdraw the money
-	void withdraw(UserAccount& amount);
+	void withdraw(UserAccount& );
 	//function to deposit the money
 	void deposit();
 	//function to tranfer the money to friendly account

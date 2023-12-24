@@ -19,7 +19,7 @@ int main()
 		switch (option) 
 		{
 		case (login):
-			u.logIn(u);
+			u.login(u);
 			break;
 		case (signIn):
 			u.createAccount(u);

@@ -6,48 +6,58 @@ UserAccount::UserAccount()
 
 }
 
-//login
-bool UserAccount::logIn(UserAccount& account)
+void UserAccount::setID(string _id)
 {
-    string _userInputId;
-    double _userInputPin;
-    cout << "please input your ID (10 characters): " << endl;
-    cin.ignore(10);
-    getline(cin, _userInputId);
-    cout << "please input your pin (6 characters): ";
-    cin >> _userInputPin;
-    _userInputId = account.ID;
-    if (!(inputAccountData(account)) || account.pin != _userInputPin)
+    ID = _id;
+}
+
+bool UserAccount::login(UserAccount& account)
+{
+    string inputID;
+    double inputPin;
+    cout << "Enter your ID: ";
+    cin >> inputID;
+
+    if (inputAccountData(inputID, account)) 
     {
-        cout << "incorrect pin code !" << endl;
-        cout << "returning to menu" << endl;
-        return 0;
+        cout << "Enter your PIN: ";
+        cin >> inputPin;
+                        //convert pin to string to compare
+        if (inputPin == account.pin)
+        {
+            cout << "Login successful!" << endl;
+            inputAccountData(inputID, account);
+            return true;
+        }
+        else 
+        {
+            cout << "Incorrect PIN. Please try again." << endl;
+        }
     }
     else 
     {
-        cout << "login sucessfully";
-        inputAccountData(account);
-        return 1;
+        cout << "Account not found. Please check your ID." << endl;
     }
+
+    return false;
 }
 
 // function to interact with file
-bool UserAccount::inputAccountData(UserAccount& account)
+bool UserAccount::inputAccountData(const string& _id, UserAccount& account)
 {
+    setID(_id);
     ifstream file(account.ID + ".txt");
     if (!file)
     {
         cout << "Error: Account not found." << endl;
         return false;
     }
-
     file >> account.pin >> account.balance;
     string friendlyAccounts;
     while (file >> friendlyAccounts)
     {
         account.friendlyAccounts.push_back(friendlyAccounts);
     }
-
     file.close();
     return true;
 }
