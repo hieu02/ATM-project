@@ -14,7 +14,7 @@ void UserAccount::setID(string _id)
 bool UserAccount::login(UserAccount& account)
 {
     string inputID;
-    double inputPin;
+    double inputPin = 0;
     cout << "Enter your ID: ";
     cin >> inputID;
 
@@ -22,7 +22,6 @@ bool UserAccount::login(UserAccount& account)
     {
         cout << "Enter your PIN: ";
         cin >> inputPin;
-                        //convert pin to string to compare
         if (inputPin == account.pin)
         {
             cout << "Login successful!" << endl;
