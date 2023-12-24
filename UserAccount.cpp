@@ -230,13 +230,40 @@ void UserAccount::withdraw(UserAccount& amount)
 //function to deposit the money
 void UserAccount::deposit()
 {
-
+    
 }
 
 //function to tranfer the money to friendly account
-void UserAccount::transfer()
+void UserAccount::transfer(UserAccount& account)
 {
-
+    const int option1 = 1;
+    const int option2 = 2;
+    int option;
+    cout << option1 << "Your friendly accounts:";
+    cout << option2 << "other accounts: ";
+    string UserAccount = ID;
+    string FriendlyAccountID;
+    double amount;
+    switch (option)
+    {
+    case (1):
+    {
+        for (const string& friendlyID : account.friendlyAccounts)
+        {
+            cout << friendlyID << " ";
+        }
+        cout << "input the friendly account you want to transfer: ";
+        getline(cin, FriendlyAccountID);
+        cout << "input the amount you want to transfer: ";
+        cin >> amount;
+        account.balance -= amount;
+        updateFile(account);
+        // subtract the balance of user
+        inputAccountData(FriendlyAccountID, account);
+        account.balance += amount;
+        updateFile(account);
+    }
+    }
 }
 
 //function to exit the main menu of ATM
