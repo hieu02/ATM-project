@@ -228,13 +228,21 @@ void UserAccount::withdraw(UserAccount& amount)
 }
 
 //function to deposit the money
-void UserAccount::deposit()
+void UserAccount::deposit(UserAccount& )
 {
-    
+    cout << "Input the amount to deposit: ";
+    int depAmount;
+    cin >> depAmount;
+    while (depAmount < 0)
+    {
+        cout << "Please input a positive number!" << endl;
+        cin >> depAmount;
+    }
+    balance += depAmount;
 }
 
 //function to tranfer the money to friendly account
-void UserAccount::transfer(UserAccount& account)
+void UserAccount::transfer(UserAccount& )
 {
     const int option1 = 1;
     const int option2 = 2;
