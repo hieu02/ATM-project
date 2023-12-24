@@ -36,9 +36,9 @@ public:
 	//function to withdraw the money
 	void withdraw(UserAccount& );
 	//function to deposit the money
-	void deposit();
+	void deposit(UserAccount&);
 	//function to tranfer the money to friendly account
-	void transfer();
+	void transfer(UserAccount&);
 	//function to exit the main menu of ATM
 	void logOut();
 };
